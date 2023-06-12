@@ -382,6 +382,20 @@ legend {
   font: inherit;
   -webkit-appearance: button; }
 
+.logotipo{
+  width: 24px;
+    height: 24px;
+}
+
+.main-content{
+  margin-left: 45px;
+    margin-right: 45px;
+}
+
+footer{
+  margin-top: 50px;
+}
+
 output {
   display: inline-block; }
 
@@ -8905,7 +8919,9 @@ img {
 .navbar {
   padding-top: 32px;
   padding-bottom: 32px; 
-position: relative;}
+  position: relative;
+  margin-bottom: 50px;
+}
 
 .navbar.scrolled {
   padding-top: 12px;
