@@ -19,8 +19,8 @@ from App_Components import views
 
 urlpatterns = [
     path('', views.inicio, name="Inicio"),
-    path('formulario/', views.formulario, name="Formulario"),
-    path('profile_form/', views.profile_form, name="Profile_Form"),
-    path('blog_form/', views.blog_form, name="Blog_Form"),
-    path('buscar_usuario/', views.buscar_usuario, name="Blog_Form"),
+    path('formulario/', views.formulario, name="Formulario"), #agrega usuario a la base de datos
+    path('profile_form/', views.profile_form, name="Profile_Form"), #agrega un perfil a la base de datos
+    path('blog_form/', views.blog_form, name="Blog_Form"), #agrega un blog a la base de datos
+    path('buscar_usuario/', views.buscar_usuario, name="Blog_Form"), #busca un usuario previamente cargado en la base de datos
 ]
