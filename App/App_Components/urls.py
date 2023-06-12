@@ -22,4 +22,5 @@ urlpatterns = [
     path('formulario/', views.formulario, name="Formulario"),
     path('profile_form/', views.profile_form, name="Profile_Form"),
     path('blog_form/', views.blog_form, name="Blog_Form"),
+    path('buscar_usuario/', views.buscar_usuario, name="Blog_Form"),
 ]

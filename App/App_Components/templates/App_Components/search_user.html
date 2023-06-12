@@ -1,0 +1,20 @@
+{% extends 'App_Components/base.html' %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block main %}
+
+
+<div>
+  <form action="" method="POST"> {% csrf_token %}
+    <table>
+      {{ miFormulario.as_table }}
+    </table>
+    <input type="submit" value="Buscar">
+  </form>
+</div>
+   
+
+{% endblock main %}

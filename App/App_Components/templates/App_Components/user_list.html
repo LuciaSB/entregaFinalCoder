@@ -1,0 +1,15 @@
+{% extends 'App_Components/base.html' %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block main %}
+
+{% for usuario in usuarios %}
+
+  <p> {{ usuario.username }} </p>
+
+{% endfor %}
+
+{% endblock main %}
