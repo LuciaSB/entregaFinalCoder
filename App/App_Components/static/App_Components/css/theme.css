@@ -8904,7 +8904,8 @@ img {
 
 .navbar {
   padding-top: 32px;
-  padding-bottom: 32px; }
+  padding-bottom: 32px; 
+position: relative;}
 
 .navbar.scrolled {
   padding-top: 12px;
