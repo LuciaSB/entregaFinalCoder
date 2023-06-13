@@ -320,7 +320,8 @@ button,
   [type="button"]:not(:disabled),
   [type="reset"]:not(:disabled),
   [type="submit"]:not(:disabled) {
-    cursor: pointer; }
+    cursor: pointer; 
+  }
 
 ::-moz-focus-inner {
   padding: 0;
@@ -401,13 +402,9 @@ form p {
   font-size: 14px;
 }
 
-form input[type="text"] {
-  outline: none;
-  border-style: solid;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 0.5px solid #dee2e6;
+
+.submit-button {
+  font-size: 12px;
 }
 
 output {
