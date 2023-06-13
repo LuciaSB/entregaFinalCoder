@@ -396,6 +396,20 @@ footer{
   margin-top: 50px;
 }
 
+form p {
+  color: #6c757d ;
+  font-size: 14px;
+}
+
+form input[type="text"] {
+  outline: none;
+  border-style: solid;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 0.5px solid #dee2e6;
+}
+
 output {
   display: inline-block; }
 

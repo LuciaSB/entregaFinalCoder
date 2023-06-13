@@ -8,7 +8,7 @@
 
 
 <div>
-  <form method="POST">
+  <form method="POST" autocomplete="off">
     {% csrf_token %}
     <p> Titulo: <input type = "text" name="title">
     <p> Contenido: <input type = "text" name="content">

@@ -7,8 +7,8 @@
 {% block main %}
 
 
-<div>
-  <form method="POST">
+<div >
+  <form method="POST" autocomplete="off">
     {% csrf_token %}
     <p> Nombre: <input type = "text" name="username">
     <p> Email: <input type = "text" name="email">
