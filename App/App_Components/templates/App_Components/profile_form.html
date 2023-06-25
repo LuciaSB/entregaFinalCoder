@@ -8,12 +8,12 @@
 
 
 <div>
-  <form method="POST" autocomplete="off">
+  <form method="POST" autocomplete="off" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>AGREGAR PERFIL</p>
-    <p> Nombre: <input type = "text" name="name">
-    <p> Apellido: <input type = "text" name="surname">
-    <p> Description: <input type = "text" name="description">
+    <p>EDITAR PERFIL</p>
+    <table>
+      {{ miFormulario.as_table }}
+    </table>
       <div>
         <input type = "submit" value="Enviar">
       </div>

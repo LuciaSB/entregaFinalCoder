@@ -11,9 +11,9 @@
   <form method="POST" autocomplete="off">
     {% csrf_token %}
     <p>AGREGAR USUARIO</p>
-    <p> Nombre: <input type = "text" name="username">
-    <p> Email: <input type = "text" name="email">
-    <p> Contraseña: <input type = "text" name="password">
+    <table>
+      {{ miFormulario.as_table }}
+    </table>
     <div>
       <input type = "submit" value="Enviar">
     </div>

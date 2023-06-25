@@ -19,8 +19,13 @@ from App_Components import views
 
 urlpatterns = [
     path('', views.inicio, name="Inicio"),
-    path('formulario/', views.formulario, name="Formulario"), #agrega usuario a la base de datos
+    path('registro/', views.registro_usuario, name="Formulario"), #agrega usuario a la base de datos
     path('profile_form/', views.profile_form, name="Profile_Form"), #agrega un perfil a la base de datos
     path('blog_form/', views.blog_form, name="Blog_Form"), #agrega un blog a la base de datos
     path('buscar_usuario/', views.buscar_usuario, name="Search_User"), #busca un usuario previamente cargado en la base de datos
+    path('login/', views.login_request, name='login'),
+    path('logout/', views.Logout.as_view(), name='logout'),
+    path('my_profile/', views.profile_view, name='my_profile'),
+    path('blog_list', views.blog_list, name='blog_list'),
+    path('blog_delete/<int:form_id>/', views.blog_delete, name='blog_delete'),
 ]

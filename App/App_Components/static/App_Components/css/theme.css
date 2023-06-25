@@ -425,6 +425,12 @@ input[type="submit"] {
   font-size: 12px;
 }
 
+.form-container-blog {
+  border: 1px solid grey;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 output {
   display: inline-block; }
 
