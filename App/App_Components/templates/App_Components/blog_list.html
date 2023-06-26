@@ -11,9 +11,10 @@
 {% for form in forms %}
 <div class="form-container-blog">
   <div>{{ form.title }}</div>
+  <div>{{ form.content }}</div>
   <div>
-      <div>Ver mas</div>
-      <div>Editar</div>
+        <a href="{% url 'view_blog' form.id %}"><button>Ver más</button></a>
+      <a href="{% url 'edit_blog' form.id %}"><button>Editar</button></a>
       <div>
           <form action="{% url 'blog_delete' form.id %}" method="POST">
               {% csrf_token %}

@@ -125,6 +125,37 @@ def blog_delete(request, form_id):
     form.delete()
     return render(request, "App_Components/index.html")
 
+def edit_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data.get('title'):
+                blog.title = data.get('title')
+            if data.get('content'):
+                blog.content = data.get('content')
+            if data.get('image'):
+                blog.image = data.get('image')
+            
+            blog.save()
+            return render(request, "App_Components/index.html")
+        else:
+            return render(request, "App_Components/blog_form.html", {"miFormulario": form})
+    form = BlogForm(
+           initial={
+            'title':blog.title,
+            'content':blog.content,
+            'image':blog.image,
+        }
+      )
+    return render(request, "App_Components/blog_form.html", {'miFormulario': form})
+
+def view_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    
+    return render(request, "App_Components/view_blog.html", {'blog': blog})
 
 class Logout(LogoutView):
     template_name = 'App_Components/logout_account.html'

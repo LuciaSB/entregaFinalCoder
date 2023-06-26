@@ -1,0 +1,18 @@
+{% extends 'App_Components/base.html' %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block main %}
+
+<div>
+  <h1>{{ blog.title }}</h1>
+  <p>{{ blog.content }}</p>
+  {% if blog.image %}
+  <img src="{{ blog.image.url }}" alt="Blog Image">
+{% endif %}
+  <p>Posted Date: {{ blog.posted_date }}</p>
+</div>
+
+{% endblock main %}
