@@ -9,6 +9,9 @@ from django.contrib.auth import login as django_login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import PasswordChangeView, LogoutView
 from django.shortcuts import get_object_or_404
+from .models import Message
+from .forms import MessageForm
+from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
@@ -159,3 +162,21 @@ def view_blog(request, blog_id):
 
 class Logout(LogoutView):
     template_name = 'App_Components/logout_account.html'
+
+@login_required
+def messages(request):
+    user = request.user
+    received_messages = Message.objects.filter(recipient=user)
+    
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = user
+            message.recipient = User.objects.get(username=form.cleaned_data['recipient'])
+            message.save()
+            return redirect('messages')
+    else:
+        form = MessageForm()
+    
+    return render(request, 'App_Components/messages.html', {'messages': received_messages, 'form': form})

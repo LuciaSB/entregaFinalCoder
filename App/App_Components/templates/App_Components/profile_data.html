@@ -12,7 +12,10 @@
   <p>Apellido: {{ profile.surname }}</p>
   <p>Descripción: {{ profile.description }}</p>
   <p>Sitio web: <a href="{{ profile.website }}">{{ profile.website }}</a></p>
+  {% if profile.image %}
   <img src="{{ profile.image.url }}" alt="Imagen de perfil">
+  {% endif %}
+  
 </div>
 
 {% endblock main %}

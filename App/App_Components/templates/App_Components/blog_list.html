@@ -9,21 +9,25 @@
 <h1>Lista de formularios</h1>
 
 {% for form in forms %}
-<div class="form-container-blog">
-  <div>{{ form.title }}</div>
-  <div>{{ form.content }}</div>
-  <div>
-        <a href="{% url 'view_blog' form.id %}"><button>Ver más</button></a>
-      <a href="{% url 'edit_blog' form.id %}"><button>Editar</button></a>
-      <div>
+  <div class="form-container-blog">
+    <div>{{ form.title }}</div>
+    <div>{{ form.content }}</div>
+    <div>
+      <a href="{% url 'view_blog' form.id %}"><button>Ver más</button></a>
+      
+      {% if user.is_authenticated and user == form.usuario %}
+        <a href="{% url 'edit_blog' form.id %}"><button>Editar</button></a>
+        <div>
           <form action="{% url 'blog_delete' form.id %}" method="POST">
-              {% csrf_token %}
-              <button type="submit">Eliminar</button>
+            {% csrf_token %}
+            <button type="submit">Eliminar</button>
           </form>
-      </div>
+        </div>
+      {% endif %}
+    </div>
   </div>
-</div>
 {% endfor %}
+
 
 
 {% endblock main %}

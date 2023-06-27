@@ -388,6 +388,17 @@ legend {
     height: 24px;
 }
 
+.navbar {
+  padding-top: 32px;
+  padding-bottom: 32px; 
+  position: relative;
+}
+
+.container{
+  margin-left: 0px !important;
+    padding-left: 0px !important;
+}
+
 .main-content{
   margin-left: 45px;
     margin-right: 45px;
@@ -8951,12 +8962,12 @@ img {
   background-size: cover;
   background-position: center center; }
 
-.navbar {
+/* .navbar {
   padding-top: 32px;
   padding-bottom: 32px; 
   position: relative;
   margin-bottom: 50px;
-}
+} */
 
 .navbar.scrolled {
   padding-top: 12px;

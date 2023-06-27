@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.contrib.auth.forms import UserCreationForm
 from ckeditor.widgets import CKEditorWidget
+from .models import Message, Profile
 
 from App_Components.models import Blog
 
@@ -38,3 +39,8 @@ class UsuarioForm(UserCreationForm):
         fields = ["username", "email", "password1", "password2"]
         help_texts = { key: '' for key in fields }
 
+class MessageForm(forms.ModelForm):
+    recipient = forms.ModelChoiceField(queryset=User.objects.all())
+    class Meta:
+        model = Message
+        fields = ['recipient', 'subject', 'body']

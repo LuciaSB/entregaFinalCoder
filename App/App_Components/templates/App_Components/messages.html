@@ -1,0 +1,32 @@
+{% extends 'App_Components/base.html' %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block main %}
+
+<h1>Mensajes</h1>
+    
+    <h2>Redactar mensaje</h2>
+    <form method="POST" action="{% url 'messages' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar mensaje</button>
+    </form>
+    
+    <hr>
+    
+    <h2>Mensajes recibidos</h2>
+    {% for message in messages %}
+        <div>
+            <h3>{{ message.subject }}</h3>
+            <p>{{ message.sender.name }} dijo:</p>
+            <p>{{ message.body }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No hay mensajes</p>
+    {% endfor %}
+
+{% endblock main %}
