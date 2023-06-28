@@ -10,12 +10,13 @@
 <div>
   <form method="POST" autocomplete="off" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>AGREGAR BLOG</p>
-    <table>
-      {{ miFormulario.as_table }}
-    </table>
-    <div>
-      <input type = "submit" value="Enviar">
+    <div class="formularios-container">
+      <table>
+        {{ miFormulario.as_table }}
+      </table>
+      <div class="submit-btn">
+        <input type = "submit" value="Enviar">
+      </div>
     </div>
   </form> 
 </div>

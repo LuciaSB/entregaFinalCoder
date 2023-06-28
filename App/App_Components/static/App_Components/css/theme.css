@@ -255,7 +255,8 @@ svg {
 
 table {
   caption-side: bottom;
-  border-collapse: collapse; }
+  border-collapse: separate;
+  border-spacing: 0 10px; }
 
 caption {
   padding-top: 0.5rem;
@@ -275,7 +276,10 @@ td,
 th {
   border-color: inherit;
   border-style: solid;
-  border-width: 0; }
+  border-width: 0; 
+  color: #151515E6;
+  font-size: 13px;
+}
 
 label {
   display: inline-block; }
@@ -328,7 +332,13 @@ button,
   border-style: none; }
 
 textarea {
-  resize: vertical; }
+  resize: vertical; 
+  border: 0.5px solid #dee2e6;
+  padding-right: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
 
 fieldset {
   min-width: 0;
@@ -388,15 +398,42 @@ legend {
     height: 24px;
 }
 
-.navbar {
-  padding-top: 32px;
-  padding-bottom: 32px; 
-  position: relative;
+nav {
+  .navbar {
+    padding-top: 32px;
+    padding-bottom: 32px; 
+    position: relative;
+  }
 }
+
+.formularios-container{
+  position: absolute;
+    left: 50%;
+    transform: translate(-50%, 25%);
+    .submit-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+}
+
+.fixed-top {
+  /* position: fixed; */
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030; 
+  float: right;
+    margin-right: 0px;
+    width: 100%;
+}
+
 
 .container{
   margin-left: 0px !important;
-    padding-left: 0px !important;
+  padding-left: 0px !important;
+  position: relative;
 }
 
 .main-content{
@@ -420,6 +457,7 @@ form input[type="text"] {
   border-right: none;
   border-left: none;
   border-bottom: 0.5px solid #dee2e6;
+  width: 100%;
 }
 
 input[type="submit"] {
@@ -5509,12 +5547,7 @@ textarea.form-control-lg {
 .ratio-21x9 {
   --bs-aspect-ratio: calc(9 / 21 * 100%); }
 
-.fixed-top {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030; }
+
 
 .fixed-bottom {
   position: fixed;
