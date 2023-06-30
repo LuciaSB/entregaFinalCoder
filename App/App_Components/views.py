@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from App_Components import models
 from App_Components.forms import BlogForm, BuscarUsuarioForm, ProfileForm, UsuarioForm
 from App_Components.models import Blog
@@ -22,47 +23,11 @@ def registro_usuario(request):
             form = UsuarioForm(data=request.POST)
             if form.is_valid():
                   form.save()
-                  return render(request, "App_Components/index.html",{"miFormulario": UsuarioForm()})
+                  return render(request, "App_Components/registro_exitoso.html",{"miFormulario": UsuarioForm()})
             else:
                  return render(request, "App_Components/formulario.html", {"miFormulario": form})
       form = UsuarioForm()
       return render(request, "App_Components/formulario.html", {"miFormulario": form})
-
-
-def profile_form(request):
-      usuario = request.user
-      modelo_perfil, _ = Profile.objects.get_or_create(usuario=usuario)
-      if request.method == 'POST':
-            form = ProfileForm(request.POST, request.FILES)
-            if form.is_valid():
-                  data = form.cleaned_data
-                  if data.get('name'):
-                     modelo_perfil.name = data.get('name')
-                  if data.get('surname'):
-                     modelo_perfil.surname = data.get('surname')
-                  if data.get('description'):
-                     modelo_perfil.description = data.get('description')
-                  if data.get('website'):
-                     modelo_perfil.website = data.get('website')
-                  if data.get('image'):
-                     modelo_perfil.image = data.get('image')
-                  else:
-                     modelo_perfil.image
-
-                  modelo_perfil.save()
-                  usuario.save()
-                  return render(request, "App_Components/index.html",{"miFormulario": ProfileForm()})
-            else:
-                 return render(request, "App_Components/profile_form.html", {"miFormulario": form})
-      form = ProfileForm(
-           initial={
-            'name':modelo_perfil.name,
-            'surname':modelo_perfil.surname,
-            'description':modelo_perfil.description,
-            'website':modelo_perfil.website,
-        }
-      )
-      return render(request, "App_Components/profile_form.html", {"miFormulario": form})
 
 
 def profile_view(request):
@@ -100,8 +65,102 @@ def buscar_usuario(request):
     else:
         busca_usuario = BuscarUsuarioForm()
         return render(request, "App_Components/search_user.html", {"miFormulario": busca_usuario})
+
+
+# @login_required
+# def profile_form(request):
+#     usuario = request.user
+#     modelo_perfil, _ = Profile.objects.get_or_create(usuario=usuario)
     
+#     if request.method == 'POST':
+#         form = ProfileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             if data.get('name'):
+#                 modelo_perfil.name = data.get('name')
+#             if data.get('surname'):
+#                 modelo_perfil.surname = data.get('surname')
+#             if data.get('description'):
+#                 modelo_perfil.description = data.get('description')
+#             if data.get('website'):
+#                 modelo_perfil.website = data.get('website')
+#             if data.get('image'):
+#                 modelo_perfil.image = data.get('image')
+
+#             modelo_perfil.save()
+#             usuario.save()
+#             return redirect('Inicio')  # Redirigir a la página de inicio después de guardar los datos
+
+#     form = ProfileForm(
+#         initial={
+#             'name': modelo_perfil.name,
+#             'surname': modelo_perfil.surname,
+#             'description': modelo_perfil.description,
+#             'website': modelo_perfil.website,
+#         }
+#     )
+
+#     if request.path == reverse('Profile_Form') or (modelo_perfil.name and modelo_perfil.surname and modelo_perfil.description):
+#         return render(request, "App_Components/Profile_Form.html", {"miFormulario": form})
+
+#     return redirect('Inicio')
+
+
+# def login_request(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             usuario = form.cleaned_data.get('username')
+#             contraseña = form.cleaned_data.get('password')
+#             user = authenticate(username=usuario, password=contraseña)
+#             if user is not None:
+#                 django_login(request, user)
+#                 return redirect('Profile_Form')
+#             else:
+#                 return render(request, "App_Components/iniciar_sesion.html", {"mensaje":"Datos incorrectos"})
+
+#     form = AuthenticationForm()
+#     return render(request, 'App_Components/iniciar_sesion.html', {'formulario':form})
+
+@login_required
+def profile_form(request):
+    usuario = request.user
+    modelo_perfil, _ = Profile.objects.get_or_create(usuario=usuario)
     
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data.get('name'):
+                modelo_perfil.name = data.get('name')
+            if data.get('surname'):
+                modelo_perfil.surname = data.get('surname')
+            if data.get('description'):
+                modelo_perfil.description = data.get('description')
+            if data.get('website'):
+                modelo_perfil.website = data.get('website')
+            if data.get('image'):
+                modelo_perfil.image = data.get('image')
+
+            modelo_perfil.save()
+            usuario.save()
+            return redirect('Inicio')  # Redirigir a la página de inicio después de guardar los datos
+
+    form = ProfileForm(
+        initial={
+            'name': modelo_perfil.name,
+            'surname': modelo_perfil.surname,
+            'description': modelo_perfil.description,
+            'website': modelo_perfil.website,
+        }
+    )
+
+    if modelo_perfil.name and modelo_perfil.surname and modelo_perfil.description:
+        return render(request, "App_Components/Profile_Form.html", {"miFormulario": form})
+
+    return render(request, "App_Components/Profile_Form.html", {"miFormulario": form})
+
+
 def login_request(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -111,7 +170,11 @@ def login_request(request):
             user = authenticate(username=usuario, password=contraseña)
             if user is not None:
                 django_login(request, user)
-                return redirect('Inicio')
+                perfil = Profile.objects.filter(usuario=user).first()
+                if perfil and perfil.name and perfil.surname and perfil.description:
+                    return redirect('Inicio')
+                else:
+                    return redirect('Profile_Form')
             else:
                 return render(request, "App_Components/iniciar_sesion.html", {"mensaje":"Datos incorrectos"})
 

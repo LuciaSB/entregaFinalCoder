@@ -16,7 +16,9 @@
     <img class="img" src="{{ profile.image.url }}" alt="Imagen de perfil">
   </div>
   {% endif %}
-  
+  <a href="{% url 'Profile_Form' %}">
+    Editar perfil
+  </a>
 </div>
 
 {% endblock main %}
