@@ -6,12 +6,14 @@
 
 {% block main %}
 
-<div>
-  <h1>{{ blog.title }}</h1>
-  <p>{{ blog.content }}</p>
+<div class="blog-container">
+  <div>{{ blog.title }}</div>
+  <div>{{ blog.content }}</div>
   {% if blog.image %}
-  <img src="{{ blog.image.url }}" alt="Blog Image">
-{% endif %}
+  <div class="image-cont">
+    <img class="img" src="{{ blog.image.url }}" alt="Blog Image">
+  </div>
+  {% endif %}
   <p>Posted Date: {{ blog.posted_date }}</p>
 </div>
 

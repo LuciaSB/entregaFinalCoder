@@ -6,14 +6,15 @@
 
 {% block main %}
 
-<div>
-  <h1>Información de perfil</h1>
+<div class="blog-container">
   <p>Nombre: {{ profile.name }}</p>
   <p>Apellido: {{ profile.surname }}</p>
   <p>Descripción: {{ profile.description }}</p>
   <p>Sitio web: <a href="{{ profile.website }}">{{ profile.website }}</a></p>
   {% if profile.image %}
-  <img src="{{ profile.image.url }}" alt="Imagen de perfil">
+  <div class="image-cont">
+    <img class="img" src="{{ profile.image.url }}" alt="Imagen de perfil">
+  </div>
   {% endif %}
   
 </div>

@@ -5,9 +5,12 @@
 {% block title %} Inicio {% endblock title %}
 
 {% block main %}
-    <form method="POST" class="m-2">
-        {% csrf_token %}
-        {{ formulario.as_p }}
-        <input type="submit" value="Iniciar sesión" class="btn btn-primary">
-    </form>
+    <div class="formularios-container">
+        <form method="POST" class="m-2">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <input type="submit" value="Login" class="btn btn-primary">
+        </form>
+    </div>
+    
 {% endblock main %}

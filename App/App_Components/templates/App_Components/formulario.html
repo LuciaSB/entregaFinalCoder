@@ -7,14 +7,13 @@
 {% block main %}
 
 
-<div >
+<div class="formularios-container">
   <form method="POST" autocomplete="off">
     {% csrf_token %}
-    <p>AGREGAR USUARIO</p>
     <table>
       {{ miFormulario.as_table }}
     </table>
-    <div>
+    <div class="submit-btn">
       <input type = "submit" value="Enviar">
     </div>
   </form>
