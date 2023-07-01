@@ -648,6 +648,22 @@ html, body {
   padding: 20px;
 }
 
+.editar-perfil-btn{
+  border-radius: 0px;
+    background: #343A40;
+    
+    border: 1px solid;
+    height: 35px;
+    width: 80px;
+    margin-top: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    .enlace{
+      color: #fff;
+    }
+}
+
 .blog-container > div {
   width: 100%; /* Ajusta el ancho al 100% del "blog-container" */
   word-wrap: break-word; /* Rompe las palabras largas para ajustarse al ancho */
