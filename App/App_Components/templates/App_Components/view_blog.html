@@ -7,8 +7,8 @@
 {% block main %}
 
 <div class="blog-container">
-  <div>{{ blog.title }}</div>
-  <div>{{ blog.content }}</div>
+  <div class="title">{{ blog.title }}</div>
+  <div class="content">{{ blog.content }}</div>
   {% if blog.image %}
   <div class="image-cont">
     <img class="img" src="{{ blog.image.url }}" alt="Blog Image">

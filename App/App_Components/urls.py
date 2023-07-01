@@ -31,4 +31,5 @@ urlpatterns = [
     path('edit-blog/<int:blog_id>/', views.edit_blog, name='edit_blog'),
     path('view_blog/<int:blog_id>/', views.view_blog, name='view_blog'),
     path('messages/', views.messages, name='messages'),
+    path('about', views.about, name='about'),
 ]

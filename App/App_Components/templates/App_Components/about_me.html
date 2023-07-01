@@ -1,0 +1,30 @@
+{% extends 'App_Components/base.html' %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block main %}
+
+<div class="about-me-container">
+  <div class="padding">
+    <div >
+        <!-- Column -->
+        <div class="card"> <img class="card-img-top" src="{% static 'App_Components/img/101163213.jpg' %}" alt="Card image cap">
+            <div class="card-body little-profile text-center">
+                <div class="pro-img"><img src="{% static 'App_Components/img/person9.jpg' %}" alt="user"></div>
+                <h3 class="m-b-0">Brie Macullam</h3>
+                <p>¡Hola! Soy Brie, creadora de este espacio dedicado al diseño, la fotografía y el arte minimalista. Aquí, además de explorar mis propios blogs, podrás sumergirte en un conjunto diverso de artículos escritos por personas apasionadas por el mismo gusto estético.
+  
+                  Únete a esta comunidad y crea tu usuario para acceder a los increíbles artículos compartidos por otros entusiastas del arte minimalista. Descubre nuevas perspectivas, inspiración y reflexiones sobre este fascinante mundo visual.
+                  
+                  Bienvenido/a a este universo de belleza minimalista, donde tu voz también puede ser parte de la conversación. ¡Anímate a crear, compartir y explorar junto a nosotros!
+                  
+                  Brie</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main %}

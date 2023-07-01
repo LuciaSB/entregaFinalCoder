@@ -5,7 +5,7 @@
 {% block title %} Inicio {% endblock title %}
 
 {% block main %}
-    <div class="formularios-container">
+    <div class="formularios-container-inicio">
         <form method="POST" class="m-2">
             {% csrf_token %}
             {{ formulario.as_p }}

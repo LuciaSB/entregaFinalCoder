@@ -11,8 +11,17 @@ class BuscarUsuarioForm(forms.Form):
     username = forms.CharField()
 
 class ProfileForm(forms.Form):
+    # name = forms.CharField(max_length=40)
+    # surname = forms.CharField(max_length=40)
+    # image = forms.ImageField(required=False)
+    # description = forms.CharField(widget=CKEditorWidget())
+    # website = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=150, label='Nombre de usuario')
     name = forms.CharField(max_length=40)
     surname = forms.CharField(max_length=40)
+    email = forms.EmailField(label='Correo', help_text='Es necesario que sea menor a 150 caracteres')
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
     image = forms.ImageField(required=False)
     description = forms.CharField(widget=CKEditorWidget())
     website = forms.CharField(max_length=100)

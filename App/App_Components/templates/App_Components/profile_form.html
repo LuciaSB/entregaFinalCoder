@@ -7,20 +7,31 @@
 {% block main %}
 
 
-<div>
+<div class="wrapper">
   <form method="POST" autocomplete="off" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="formularios-container">
+    <div class="formularios-container-editar-perfil">
       Editar mi perfil
       <table>
-        {{ miFormulario.as_table }}
+        {{ miFormulario.username.errors }}
+        <tr>
+          <th>{{ miFormulario.username.label }}</th>
+          <td>{{ miFormulario.username }}</td>
+        </tr>
+        {% for field in miFormulario.visible_fields %}
+          {% if field.name != 'username' %}
+            <tr>
+              <th>{{ field.label }}</th>
+              <td>{{ field }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
       </table>
-        <div class="submit-btn">
-          <input type = "submit" value="Enviar">
-        </div>
+      <div class="submit-btn">
+        <input type="submit" value="Enviar">
+      </div>
     </div>
-    
-  </form> 
+  </form>
 </div>
    
 

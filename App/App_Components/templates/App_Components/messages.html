@@ -12,9 +12,9 @@
         <h2>Mensajes recibidos</h2>
         {% for message in messages %}
             <div>
-                <h3>{{ message.subject }}</h3>
-                <p>{{ message.sender.name }} dijo:</p>
-                <p>{{ message.body }}</p>
+                <p class="break-word-msj">De: {{ message.sender.username }}</p>
+                <p class="break-word-msj">Asunto: {{ message.subject }}</p>
+                <p class="break-word-msj">{{ message.body }}</p>
             </div>
             <hr>
         {% empty %}

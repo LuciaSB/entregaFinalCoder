@@ -66,75 +66,25 @@ def buscar_usuario(request):
         busca_usuario = BuscarUsuarioForm()
         return render(request, "App_Components/search_user.html", {"miFormulario": busca_usuario})
 
-
-# @login_required
-# def profile_form(request):
-#     usuario = request.user
-#     modelo_perfil, _ = Profile.objects.get_or_create(usuario=usuario)
-    
-#     if request.method == 'POST':
-#         form = ProfileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             if data.get('name'):
-#                 modelo_perfil.name = data.get('name')
-#             if data.get('surname'):
-#                 modelo_perfil.surname = data.get('surname')
-#             if data.get('description'):
-#                 modelo_perfil.description = data.get('description')
-#             if data.get('website'):
-#                 modelo_perfil.website = data.get('website')
-#             if data.get('image'):
-#                 modelo_perfil.image = data.get('image')
-
-#             modelo_perfil.save()
-#             usuario.save()
-#             return redirect('Inicio')  # Redirigir a la página de inicio después de guardar los datos
-
-#     form = ProfileForm(
-#         initial={
-#             'name': modelo_perfil.name,
-#             'surname': modelo_perfil.surname,
-#             'description': modelo_perfil.description,
-#             'website': modelo_perfil.website,
-#         }
-#     )
-
-#     if request.path == reverse('Profile_Form') or (modelo_perfil.name and modelo_perfil.surname and modelo_perfil.description):
-#         return render(request, "App_Components/Profile_Form.html", {"miFormulario": form})
-
-#     return redirect('Inicio')
-
-
-# def login_request(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             usuario = form.cleaned_data.get('username')
-#             contraseña = form.cleaned_data.get('password')
-#             user = authenticate(username=usuario, password=contraseña)
-#             if user is not None:
-#                 django_login(request, user)
-#                 return redirect('Profile_Form')
-#             else:
-#                 return render(request, "App_Components/iniciar_sesion.html", {"mensaje":"Datos incorrectos"})
-
-#     form = AuthenticationForm()
-#     return render(request, 'App_Components/iniciar_sesion.html', {'formulario':form})
-
 @login_required
 def profile_form(request):
     usuario = request.user
     modelo_perfil, _ = Profile.objects.get_or_create(usuario=usuario)
-    
+
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
+            if data.get('username'):
+                usuario.username = data.get('username')
             if data.get('name'):
                 modelo_perfil.name = data.get('name')
             if data.get('surname'):
                 modelo_perfil.surname = data.get('surname')
+            if data.get('email'):
+                usuario.email = data.get('email')
+            if data.get('password1') and data.get('password2') and data.get('password1') == data.get('password2'):
+                usuario.set_password(data.get('password1'))
             if data.get('description'):
                 modelo_perfil.description = data.get('description')
             if data.get('website'):
@@ -144,12 +94,14 @@ def profile_form(request):
 
             modelo_perfil.save()
             usuario.save()
-            return redirect('Inicio')  # Redirigir a la página de inicio después de guardar los datos
+            # return render(request, "App_Components/profile_data.html", {"miFormulario": form})
 
     form = ProfileForm(
         initial={
+            'username': usuario.username,
             'name': modelo_perfil.name,
             'surname': modelo_perfil.surname,
+            'email': usuario.email,
             'description': modelo_perfil.description,
             'website': modelo_perfil.website,
         }
@@ -189,7 +141,7 @@ def blog_list(request):
 def blog_delete(request, form_id):
     form = get_object_or_404(Blog, id=form_id)
     form.delete()
-    return render(request, "App_Components/index.html")
+    return redirect('blog_list')
 
 def edit_blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
@@ -206,7 +158,7 @@ def edit_blog(request, blog_id):
                 blog.image = data.get('image')
             
             blog.save()
-            return render(request, "App_Components/index.html")
+            return redirect('blog_list')
         else:
             return render(request, "App_Components/blog_form.html", {"miFormulario": form})
     form = BlogForm(
@@ -224,7 +176,7 @@ def view_blog(request, blog_id):
     return render(request, "App_Components/view_blog.html", {'blog': blog})
 
 class Logout(LogoutView):
-    template_name = 'App_Components/logout_account.html'
+    template_name = 'App_Components/index.html'
 
 @login_required
 def messages(request):
@@ -243,3 +195,6 @@ def messages(request):
         form = MessageForm()
     
     return render(request, 'App_Components/messages.html', {'messages': received_messages, 'form': form})
+
+def about(request):
+        return render(request, 'App_Components/about_me.html')
