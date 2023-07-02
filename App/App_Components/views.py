@@ -29,7 +29,6 @@ def registro_usuario(request):
       form = UsuarioForm()
       return render(request, "App_Components/formulario.html", {"miFormulario": form})
 
-
 def profile_view(request):
     profile = Profile.objects.get(usuario=request.user)
     return render(request, "App_Components/profile_data.html", {"profile": profile})
@@ -94,23 +93,22 @@ def profile_form(request):
 
             modelo_perfil.save()
             usuario.save()
-            # return render(request, "App_Components/profile_data.html", {"miFormulario": form})
-
-    form = ProfileForm(
-        initial={
-            'username': usuario.username,
-            'name': modelo_perfil.name,
-            'surname': modelo_perfil.surname,
-            'email': usuario.email,
-            'description': modelo_perfil.description,
-            'website': modelo_perfil.website,
-        }
-    )
-
-    if modelo_perfil.name and modelo_perfil.surname and modelo_perfil.description:
+            # return redirect('my_profile')
+        else:
+            return redirect('Inicio')
+    else:
+        form = ProfileForm(
+            initial={
+                'username': usuario.username,
+                'name': modelo_perfil.name,
+                'surname': modelo_perfil.surname,
+                'email': usuario.email,
+                'description': modelo_perfil.description,
+                'website': modelo_perfil.website,
+            }
+        )
         return render(request, "App_Components/Profile_Form.html", {"miFormulario": form})
-
-    return render(request, "App_Components/Profile_Form.html", {"miFormulario": form})
+    return redirect('Inicio')  
 
 
 def login_request(request):
@@ -178,7 +176,7 @@ def view_blog(request, blog_id):
 class Logout(LogoutView):
     template_name = 'App_Components/index.html'
 
-@login_required
+
 def messages(request):
     user = request.user
     received_messages = Message.objects.filter(recipient=user).order_by('-sent_date')
