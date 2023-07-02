@@ -10,25 +10,30 @@
 <div class="container-mensajes">
     <div class="column-msj">
         <h2>Mensajes recibidos</h2>
-        {% for message in messages %}
+        <div class="div-msj">
+            {% for message in messages %}
             <div>
                 <p class="break-word-msj">De: {{ message.sender.username }}</p>
                 <p class="break-word-msj">Asunto: {{ message.subject }}</p>
                 <p class="break-word-msj">{{ message.body }}</p>
             </div>
             <hr>
-        {% empty %}
-            <p>No hay mensajes</p>
-        {% endfor %}
+            {% empty %}
+                <p>No hay mensajes</p>
+            {% endfor %}
+        </div>
     </div>
 
     <div class="column-msj">
         <h2>Redactar mensaje</h2>
-        <form method="POST" action="{% url 'messages' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="enviar-mensaje" type="submit">Enviar</button>
-        </form>
+        <div class="div-msj">
+            <form method="POST" action="{% url 'messages' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="enviar-mensaje" type="submit">Enviar</button>
+            </form>
+        </div>
+        
     </div>
 </div>
 

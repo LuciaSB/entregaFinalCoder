@@ -308,7 +308,8 @@ select {
   cursor: pointer; }
 
 select {
-  word-wrap: normal; }
+  word-wrap: normal; 
+  border-color: #dee2e6;}
   select:disabled {
     opacity: 1; }
 
@@ -699,12 +700,19 @@ html, body {
   display: flex;
   position: relative;
   left: 53%;
-  transform: translate(-50%, 15%);
+  transform: translate(-50%, 3%);
   grid-gap: 20px;
+  height: 500px;
   .column-msj {
           flex: 1;
           margin-right: 20px;
-      }
+          max-height: 490px; /* Define la altura máxima deseada */
+        overflow-y: auto; /* Habilita el scroll vertical cuando el contenido excede la altura máxima */
+        .div-msj{
+          margin-top: 40px;
+        }
+    }
+    }
   .enviar-mensaje{
     border-radius: 0px;
     background: #343A40;
@@ -713,7 +721,6 @@ html, body {
     height: 35px;
     width: 80px;
   }
-}
 
 .break-word-msj{
   word-break: break-word;
