@@ -181,7 +181,7 @@ class Logout(LogoutView):
 @login_required
 def messages(request):
     user = request.user
-    received_messages = Message.objects.filter(recipient=user)
+    received_messages = Message.objects.filter(recipient=user).order_by('-sent_date')
     
     if request.method == 'POST':
         form = MessageForm(request.POST)
