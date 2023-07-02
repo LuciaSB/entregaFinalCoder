@@ -701,8 +701,10 @@ html, body {
   position: relative;
   left: 53%;
   transform: translate(-50%, 3%);
-  grid-gap: 20px;
+  /* grid-gap: 20px; */
   height: 500px;
+  justify-content: space-between;
+  width: 100%;
   .column-msj {
           flex: 1;
           margin-right: 20px;
